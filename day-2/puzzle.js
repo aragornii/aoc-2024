@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Resolve the file path relative to the current script
+// Resolve the file path
 const filePath = path.join(__dirname, 'input.txt');
 
 // Read the file
@@ -19,7 +19,7 @@ const array = readFileAndReturnArray(filePath);
 
 console.log(JSON.stringify(array));
 
-// Function to check if it's ascending or descending and difference between two adjacent number is less than 3
+// Function to check if arr is ascending or descending and difference between two adjacent number is less than 3
 function isSorted(arr) {
     return (arr.every(function (x, i) {
         return (i === 0 || x > arr[i - 1]); // Ascending check
@@ -31,5 +31,5 @@ function isSorted(arr) {
 }
 
 // Apply isSorted function and count how many true
-console.log(array.map((value) => isSorted(value)));
+//console.log(array.map((value) => isSorted(value)));
 console.log(array.map((value) => isSorted(value)).filter(Boolean).length);
