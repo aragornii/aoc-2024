@@ -39,47 +39,23 @@ console.log(array.map((value) => isSorted(value)).filter(Boolean).length);
 
 // PART 2
 
-// Return indexes of arr which don't comply the rule
-function returnArrIndex(arr) {
-    const result = [];
-    const isAscending = arr[1] > arr[0]; // Determine initial direction
-
-    for (let i = 0; i < arr.length; i++) {
-        if (i === 0) {
-            if ((isAscending && arr[i] >= arr[i + 1]) || // Breaks ascending order
-            (!isAscending && arr[i] <= arr[i + 1]) || // Breaks descending order
-            Math.abs(arr[i + 1] - arr[i]) > 3) { // Difference > 3
-            result.push(i);
-            }
-        } else {
-            if ((isAscending && arr[i] <= arr[i - 1]) || // Breaks ascending order
-            (!isAscending && arr[i] >= arr[i - 1]) || // Breaks descending order
-            Math.abs(arr[i] - arr[i - 1]) > 3) { // Difference > 3
-            result.push(i);
-            }
-        }   
-    }
-    return result;
-}
-
-// Remove element of arr not complying the rule and testing again
-function removeArrIndexes (arr) {
+// Check if array is sorted by removing an element one by one.
+function isSortedRemovingElement (arr) {
     if (isSorted(arr)) {
-        return true; // Returns true if it complies the rule
-    } else {
-        const indexes = returnArrIndex(arr); // Creating array of non-compliant indexes
-
-        for (let i = 0; i < indexes.length; i++) {
-            const arrNew = arr.toSpliced(indexes[i], 1); // Removing one-by-one non-compliant indexes and retesting rule
-
-            if(isSorted(arrNew)) {
-                return true;
-            }
-        }
-        return false;
+        return true; // If already sorted, return true
     }
+
+    // Loop through each element, remove it, and test the resulting array
+    for (let i = 0; i < arr.length; i++) {
+        const arrNew = arr.toSpliced(i, 1);
+        if (isSorted(arrNew)) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 // Counting how many arrays are rule-compliant (Safe)
 //console.log(array.map((value) => removeArrIndexes(value)));
-console.log(array.map((value) => removeArrIndexes(value)).filter(Boolean).length);
+console.log(array.map((value) => isSortedRemovingElement(value)).filter(Boolean).length);
