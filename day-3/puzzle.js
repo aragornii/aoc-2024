@@ -33,6 +33,7 @@ const arraySummed = arrayMultiplied.reduce((a, b) => a + b);
 console.log(arraySummed);
 
 // PART 2
+
 // Regex to find string between "don't()" and "do()"
 const regexPart2 = /don't\(\).*?do\(\)/g;
 
